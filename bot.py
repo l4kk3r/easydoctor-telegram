@@ -16,7 +16,7 @@ def send_request(user_id):
 
 @bot.message_handler(commands=['start'])
 def start_message(message):
-    bot.send_message(message.chat.id, '👋Привет, я бот EasyDoctor.\nС помощью меня ты сможешь записаться к любому врачу!')
+    bot.send_message(message.chat.id, '👋Привет, я бот EasyDoctor.\nС помощью меня ты сможешь записаться к любому врачу!\n\nЧтобы записаться к доктору воспользуйтесь командой /reg')
     status[message.chat.id] = 'main'
 
 @bot.message_handler(commands=['reg'])
@@ -40,9 +40,9 @@ def send_text(message):
     elif status[message.chat.id] == 'time_waiting':
         times[message.chat.id] = message.text
         send_request(message.chat.id)
-        bot.send_message(message.chat.id, 'Спасибо! Ваша заявка успешно подана.')
+        bot.send_message(message.chat.id, '📝Спасибо! Ваша заявка успешно подана.')
         status[message.chat.id] = 'main'
     else:
-        bot.send_message(message.chat.id, 'Чтобы зарегистрироваться к доктору воспользуйтесь командой /reg')
+        bot.send_message(message.chat.id, '💡Чтобы записаться к доктору воспользуйтесь командой /reg')
 
 bot.polling()
