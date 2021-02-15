@@ -1,4 +1,5 @@
 import telebot
+from telebot import types
 import requests
 
 bot = telebot.TeleBot('1625581742:AAE3xsoGvlQ7xtKNqZF3hWQnLOO1_dxVTk0')
@@ -7,6 +8,11 @@ status = {}
 nicks = {}
 doctors = {}
 times = {}
+
+markup = types.ReplyKeyboardMarkup(row_width=2)
+itembtn1 = types.KeyboardButton('Никифорова Елизавета Юрьевна')
+itembtn2 = types.KeyboardButton('Анотьева Ирина Михайловна')
+markup.add(itembtn1, itembtn2)
 
 
 def send_request(user_id):
@@ -31,9 +37,12 @@ def send_text(message):
     
     if status[message.chat.id] == 'name_waiting':
         nicks[message.chat.id] = message.text
-        bot.send_message(message.chat.id, 'Пришлите ФИО доктора к которому вы хотите записаться')
+        bot.send_message(message.chat.id, 'К какому доктору вы хотите записаться?', reply_markup=markup)
         status[message.chat.id] = 'doctor_waiting'
     elif status[message.chat.id] == 'doctor_waiting':
+        if message.text not in ['Анотьева Ирина Михайловна', 'Никифорова Елизавета Юрьевна']:
+            bot.send_message(message.chat.id, 'Данного доктора нет в нашей системе')
+            return 1
         doctors[message.chat.id] = message.text
         bot.send_message(message.chat.id, 'Пришлите время на которое вы хотите записаться')
         status[message.chat.id] = 'time_waiting'
