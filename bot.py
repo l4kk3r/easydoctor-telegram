@@ -22,8 +22,9 @@ markupb.add(types.KeyboardButton("/reg"))
 
 def send_request(user_id):
     global nicks, doctors, times
-    requests.post('https://easydoctorr.herokuapp.com/telegramrecord/', data={'username': nicks[user_id], 'doctor': doctors[user_id], 'time': times[user_id]})
-
+    r = requests.post('https://easydoctorr.herokuapp.com/telegramrecord/', data={'username': nicks[user_id], 'doctor': doctors[user_id], 'time': times[user_id]})
+    print(r.json())
+    return True
 
 @bot.message_handler(commands=['start'])
 def start_message(message):
