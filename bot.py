@@ -10,8 +10,8 @@ doctors = {}
 times = {}
 
 markup = types.ReplyKeyboardMarkup(row_width=2, resize_keyboard=True)
-itembtn1 = types.KeyboardButton('Никифорова Елизавета Юрьевна')
-itembtn2 = types.KeyboardButton('Анотьева Ирина Михайловна')
+itembtn1 = types.KeyboardButton('Анатольева Елизавета Юрьевна')
+itembtn2 = types.KeyboardButton('Волкова Ирина Михайловна')
 markup.add(itembtn1, itembtn2)
 
 markupt = types.ReplyKeyboardMarkup(row_width=2, resize_keyboard=True)
