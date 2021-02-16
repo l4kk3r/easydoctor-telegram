@@ -46,7 +46,7 @@ def send_text(message):
             bot.send_message(message.chat.id, 'Данного доктора нет в нашей системе')
             return 1
         doctors[message.chat.id] = message.text
-        bot.send_message(message.chat.id, 'Пришлите время на которое вы хотите записаться')
+        bot.send_message(message.chat.id, 'Пришлите время на которое вы хотите записаться', reply_markup=markupt)
         status[message.chat.id] = 'time_waiting'
     elif status[message.chat.id] == 'time_waiting':
         times[message.chat.id] = message.text
