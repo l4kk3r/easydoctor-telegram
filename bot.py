@@ -23,7 +23,8 @@ markupb.add(types.KeyboardButton("/reg"))
 def send_request(user_id):
     global nicks, doctors, times
     r = requests.post('https://easydoctorr.herokuapp.com/telegramrecord/', data={'username': nicks[user_id], 'doctor': doctors[user_id], 'time': times[user_id]})
-    return r.content
+    ans = "Success" in r.content
+    return ans
 
 @bot.message_handler(commands=['start'])
 def start_message(message):
@@ -54,7 +55,10 @@ def send_text(message):
     elif status[message.chat.id] == 'time_waiting':
         times[message.chat.id] = message.text
         s = send_request(message.chat.id)
-        bot.send_message(message.chat.id,f"{s}", reply_markup=markupb)
+        if s:
+            bot.send_message(message.chat.id,f"📝Успех! Запись к врачу успешно создана", reply_markup=markupb)
+        else:
+            bot.send_message(message.chat.id,f"❌Неудача! Запись к врачу на данное время уже существует", reply_markup=markupb)
         status[message.chat.id] = 'main'
     else:
         bot.send_message(message.chat.id, '💡Чтобы записаться к доктору воспользуйтесь командой /reg')
