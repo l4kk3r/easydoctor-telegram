@@ -23,8 +23,10 @@ markupb.add(types.KeyboardButton("/reg"))
 def send_request(user_id):
     global nicks, doctors, times
     r = requests.post('https://easydoctorr.herokuapp.com/telegramrecord/', data={'username': nicks[user_id], 'doctor': doctors[user_id], 'time': times[user_id]})
-    ans = "Success" in r.content
-    return ans
+    if "Success" in str(r.content):
+        return True
+    else: 
+        return False
 
 @bot.message_handler(commands=['start'])
 def start_message(message):
