@@ -48,7 +48,7 @@ def send_text(message):
         bot.send_message(message.chat.id, 'К какому доктору вы хотите записаться?', reply_markup=markup)
         status[message.chat.id] = 'doctor_waiting'
     elif status[message.chat.id] == 'doctor_waiting':
-        if message.text not in ['Анотьева Ирина Михайловна', 'Никифорова Елизавета Юрьевна']:
+        if message.text not in ['Волкова Ирина Михайловна', 'Анатольева Елизавета Юрьевна']:
             bot.send_message(message.chat.id, 'Данного доктора нет в нашей системе')
             return 1
         doctors[message.chat.id] = message.text
