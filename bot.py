@@ -17,6 +17,9 @@ markup.add(itembtn1, itembtn2)
 markupt = types.ReplyKeyboardMarkup(row_width=2, resize_keyboard=True)
 markupt.add(types.KeyboardButton('18:00'), types.KeyboardButton('19:00'), types.KeyboardButton('20:00'), types.KeyboardButton('21:00'), types.KeyboardButton("22:00"))
 
+markupb = types.ReplyKeyboardMarkup(row_width=2, resize_keyboard=True)
+markupb.add(types.KeyboardButton("/reg"))
+
 def send_request(user_id):
     global nicks, doctors, times
     requests.post('https://easydoctorr.herokuapp.com/telegramrecord/', data={'username': nicks[user_id], 'doctor': doctors[user_id], 'time': times[user_id]})
@@ -51,7 +54,7 @@ def send_text(message):
     elif status[message.chat.id] == 'time_waiting':
         times[message.chat.id] = message.text
         send_request(message.chat.id)
-        bot.send_message(message.chat.id, '📝Спасибо! Ваша заявка успешно подана.')
+        bot.send_message(message.chat.id, '📝Спасибо! Ваша заявка успешно подана.', reply_markup=markupb)
         status[message.chat.id] = 'main'
     else:
         bot.send_message(message.chat.id, '💡Чтобы записаться к доктору воспользуйтесь командой /reg')
