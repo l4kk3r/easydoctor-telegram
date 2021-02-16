@@ -53,8 +53,11 @@ def send_text(message):
         status[message.chat.id] = 'time_waiting'
     elif status[message.chat.id] == 'time_waiting':
         times[message.chat.id] = message.text
-        send_request(message.chat.id)
-        bot.send_message(message.chat.id, '📝Спасибо! Ваша заявка успешно подана.', reply_markup=markupb)
+        s = send_request(message.chat.id)
+        if s:
+            bot.send_message(message.chat.id, '📝Спасибо! Ваша заявка успешно подана.', reply_markup=markupb)
+        else:
+            bot.send_message(message.chat.id, '❌Отмена! Запись к данному доктору на данное время уже существует!', reply_markup=markupb)
         status[message.chat.id] = 'main'
     else:
         bot.send_message(message.chat.id, '💡Чтобы записаться к доктору воспользуйтесь командой /reg')
