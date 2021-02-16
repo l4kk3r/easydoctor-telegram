@@ -54,7 +54,7 @@ def send_text(message):
     elif status[message.chat.id] == 'time_waiting':
         times[message.chat.id] = message.text
         s = send_request(message.chat.id)
-        bot.send_message(message.chat.id, "ok", reply_markup=markupb)
+        bot.send_message(message.chat.id,f"{s}", reply_markup=markupb)
         status[message.chat.id] = 'main'
     else:
         bot.send_message(message.chat.id, '💡Чтобы записаться к доктору воспользуйтесь командой /reg')
