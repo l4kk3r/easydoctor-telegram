@@ -14,6 +14,8 @@ itembtn1 = types.KeyboardButton('Никифорова Елизавета Юрь�
 itembtn2 = types.KeyboardButton('Анотьева Ирина Михайловна')
 markup.add(itembtn1, itembtn2)
 
+markupt = types.ReplyKeyboardMarkup(row_width=2, resize_keyboard=True)
+markupt.add(types.KeyboardButton('18:00'), types.KeyboardButton('19:00'), types.KeyboardButton('20:00'), types.KeyboardButton('21:00'), types.KeyboardButton("22:00"))
 
 def send_request(user_id):
     global nicks, doctors, times
